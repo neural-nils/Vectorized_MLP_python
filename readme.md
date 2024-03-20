@@ -251,7 +251,9 @@ In this example, the neural network thinks that the digit "2" might be the most 
 
 The softmax function is given by the following formula and code (I followed the indexing of [[2]](2) but made it a bit more clear that j indexes over all classes):
 
-$$ softmax(Z)_i = \frac{e^{z_i}}{\sum_{j \in classes}^{}e^{z_j}} $$
+<p align="center">
+<img src="softmax.png" width=200/>
+</p>
 
 Important: The output of the softmax is vector-valued, it takes an input vector of len(classes) and <b>outputs a vector of the same length</b>. More specifically, we raise e to the power of the value of each output:  $e^{z_i}$ and divide it by the sum of these values over all classes.
 
@@ -514,7 +516,7 @@ $$ \frac{\partial L}{\partial b_{l}}=\frac{\partial Z_l}{\partial b_{l}}\cdot\te
 
 At this point let's try to visualize again with a sketch. Looking at the picture below, we can already tell that the backpropagation step is a little bit more complicated than the forward pass. Again, mathematical notation is usually very general. Therefore, to make it clear, we  enumerate the layers from layer 0 (input layer) to layer 3 (output layer). We can now start backpropagating at the end of the neural net: Here, the loss w.r.t. $Z$ is computed slightly different, due to the softmax function, as explained above. Once, we have computed the gradient of the loss w.r.t. $Z_3$ (last layer), it gets a little simpler.
 The most important point is, that we calculate the gradient of the loss function w.r.t. $Z$ for each neuron and link it to the previous layer by the gradient of $Z$ w.r.t. $A_{prev}$, which is simply the weights of the current layer. By transposing the weights we can use matrix multiplication. The resulting matrix has a shape that aligns with $Z$ and $A$ of the previous layer. 
-We can then use element-wise multiplication with the gradient of the activation function $\sigma'(Z)$, to obtain the gradient of the loss function w.r.t. $Z$. I prefer using "$\odot$" here, because element-wise multiplication is a very different operation than matrix multiplication.
+We can then use element-wise multiplication with the gradient of the activation function $\sigma'(Z)$, to obtain the gradient of the loss function w.r.t. $Z$. I prefer using $\odot$ here, because element-wise multiplication is a very different operation than matrix multiplication.
 
 In the second part of the picture you can see the involved matrix operations and how the gradient of the loss function w.r.t. $Z$ is bridging the different layers with both the gradient of Z w.r.t. $A_{prev}$, as well as the gradient of the activation function. 
 
@@ -644,6 +646,10 @@ We developed an MLP from scratch in Python and numpy without help from any deep 
 ### References
 
 <a id="1">[1]<a/> http://yann.lecun.com/exdb/mnist/
+
 <a id="2">[2]<a/> https://www.coursera.org/specializations/deep-learning
+
 <a id="3">[3]<a/> https://www.deeplearningbook.org/contents/mlp.html
+
 <a id="4">[4]<a/> https://stanford.edu/~jlmcc/papers/PDP/Volume%201/Chap8_PDP86.pdf
+
