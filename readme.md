@@ -1,7 +1,7 @@
 
-##Vectorized Multi-Layer Perceptron (MLP) from scratch in Python 
+## Vectorized Multi-Layer Perceptron (MLP) from scratch in Python 
 
-###Introduction
+### Introduction
 
 In this tutorial I want to share my implementation of a vectorized Multi-Layer Perceptron (MLP) in Python and Numpy without getting help from any ML framework, like Pytorch, Tensorflow, etc. I think that implementing a vectorized neural network completely from scratch is the best way to fully grasp artificial neural networks (ANNs).
 
@@ -13,7 +13,7 @@ In this tutorial, I will use the MNIST  dataset [[1]](#references), because it i
 
 <br />
 
-####Loading the MNIST dataset
+#### Loading the MNIST dataset
 
 First, we open the binary training data file and read the first couple of bytes, according to Yann LeCuns instructions [[1]](#references) . These bytes encode some properties of the dataset, e.g. a magic number (file type identifier), number of training examples, height and width of the pictures:
 
@@ -46,7 +46,7 @@ Flattening the MNIST image destroys the spatial component of the initially 2-dim
  
 <br />
 
-####Visualizing single pictures from the MNIST dataset
+#### Visualizing single pictures from the MNIST dataset
 
 If you want to see some of the images, you might want to plot it with the following lines of code:
 
@@ -70,7 +70,7 @@ We just go to a specified row and reshape it to the 28 x 28 pixel array to obtai
 
 <br />
 
-####Creating batches from the MNIST images
+#### Creating batches from the MNIST images
 
 Given a desired batch size the next couple of lines determine how many batches you can get from the total number of images and, subsequently package them into tuples where each sequence of images in a minibatch is aligned with the corresponding labels. 
 
@@ -123,7 +123,7 @@ train_imgs[:,59900:60000]
 
 <br />
 
-####Implementing the Multi-Layer Perceptron 
+#### Implementing the Multi-Layer Perceptron 
 
 Now, we are getting to the heart of the program. 
 
@@ -409,7 +409,7 @@ def calculate_loss(self, Y_hat, Y_oh):
 ~~~python
 loss += net1.calculate_loss(Y_hat, Y_oh)
 ~~~
-####Backpropagation
+#### Backpropagation
 Now, that we computed the loss, we can finally start with the process of backpropagation.
 
 At this point we are at the heart of ML. How can we optimize the classifier?
@@ -530,7 +530,7 @@ It is also important to note, that the arrows in the image below can be thought 
 <br />
 <br />
 
-####Weight update
+#### Weight update
 
 After we calculated the gradients for all layers, the only thing we are left to do is the weight update, where $\alpha$ is the learning rate (often times 0.01 is a good start):
 
@@ -562,7 +562,7 @@ def backprop(self, Y_hat, Y_oh, lr=0.01):
 ~~~
 
 
-####Running the MLP
+#### Running the MLP
 
 Now, we can complete our loop from above:
 
@@ -636,12 +636,12 @@ accuracy on test set 0.9531
 
 Therefore, our net is generalizing good to unknown data and did not overfit to the train set.
 
-####Summary
+#### Summary
 
 We developed an MLP from scratch in Python and numpy without help from any deep learning libray, including deriving most of the mathematical formulas ourselves.
 
 
-###References
+### References
 
 <a id="1">[1]<a/> http://yann.lecun.com/exdb/mnist/
 <a id="2">[2]<a/> https://www.coursera.org/specializations/deep-learning
