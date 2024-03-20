@@ -417,11 +417,11 @@ Now, that we computed the loss, we can finally start with the process of backpro
 At this point we are at the heart of ML. How can we optimize the classifier?
 We need a way to dampen the signal of neurons that contributed to the wrong answer, and to amplify the signal of neurons that contributed to the right answer. To achieve this we rely on calculus and the chain rule. To update the weights in gradient descent, we need the gradient of the loss function with respect to the weights as well as the gradient of the loss function with respect to the biases. We first calculate $\frac{\partial L}{\partial Z}$ in each layer. This can then be used to obtain the gradients for the weights and biases, e.g. for the last layer:
 
-$$ \textcolor{blue}{\frac{\partial L}{\partial Z}}  = \frac{\partial \hat{Y}}{\partial Z}\frac{\partial L}{\partial \hat{Y}}$$
+$$ \textcolor{magenta}{\frac{\partial L}{\partial Z}}  = \frac{\partial \hat{Y}}{\partial Z}\frac{\partial L}{\partial \hat{Y}}$$
 
-$$ \frac{\partial L}{\partial W} = \frac{\partial Z}{\partial W} \textcolor{blue}{\frac{\partial L}{\partial Z}}$$
+$$ \frac{\partial L}{\partial W} = \frac{\partial Z}{\partial W} \textcolor{magenta}{\frac{\partial L}{\partial Z}}$$
 
-$$\frac{\partial L}{\partial b} = \frac{\partial Z}{\partial b} \textcolor{blue}{\frac{\partial L}{\partial Z}}$$
+$$\frac{\partial L}{\partial b} = \frac{\partial Z}{\partial b} \textcolor{magenta}{\frac{\partial L}{\partial Z}}$$
 
 These formula look a bit complicated and it takes some time to get behind them, but the idea is really straightforward. To me, it helps a lot to read the formula from <u>right to left</u>. We start with the gradient of the loss function with respect to $\hat{Y}$, which is denoted by $\frac{\partial L}{\partial \hat{Y}}$.
 
@@ -506,13 +506,13 @@ With this, we can assemble an essential formula that links the layers during bac
 
 $$ \frac{\partial L}{\partial Z_{l}} = \frac{\partial A_l}{\partial Z_{l}}\cdot\frac{\partial Z_{l+1}}{\partial A_l}\cdot\frac{\partial L}{\partial Z_{l+1}} $$
 
-$$ \textcolor{blue}{\frac{\partial L}{\partial Z_{l}}} = \sigma'(z)\odot W.T_{l+1}\cdot\frac{\partial L}{\partial Z_{l+1}} $$
+$$ \textcolor{magenta}{\frac{\partial L}{\partial Z_{l}}} = \sigma'(z)\odot W.T_{l+1}\cdot\frac{\partial L}{\partial Z_{l+1}} $$
 
 Then, we can also derive formulas to get the gradient of the loss function with respect to the weights.
 
-$$ \frac{\partial L}{\partial W_{l}}=\frac{\partial Z_l}{\partial W_{l}}\cdot\textcolor{blue}{\frac{\partial L}{\partial Z_{l}}} $$
+$$ \frac{\partial L}{\partial W_{l}}=\frac{\partial Z_l}{\partial W_{l}}\cdot\textcolor{magenta}{\frac{\partial L}{\partial Z_{l}}} $$
 
-$$ \frac{\partial L}{\partial b_{l}}=\frac{\partial Z_l}{\partial b_{l}}\cdot\textcolor{blue}{\frac{\partial L}{\partial Z_{l}}} $$
+$$ \frac{\partial L}{\partial b_{l}}=\frac{\partial Z_l}{\partial b_{l}}\cdot\textcolor{magenta}{\frac{\partial L}{\partial Z_{l}}} $$
 
 At this point let's try to visualize again with a sketch. Looking at the picture below, we can already tell that the backpropagation step is a little bit more complicated than the forward pass. Again, mathematical notation is usually very general. Therefore, to make it clear, we  enumerate the layers from layer 0 (input layer) to layer 3 (output layer). We can now start backpropagating at the end of the neural net: Here, the loss w.r.t. $Z$ is computed slightly different, due to the softmax function, as explained above. Once, we have computed the gradient of the loss w.r.t. $Z_3$ (last layer), it gets a little simpler.
 The most important point is, that we calculate the gradient of the loss function w.r.t. $Z$ for each neuron and link it to the previous layer by the gradient of $Z$ w.r.t. $A_{prev}$, which is simply the weights of the current layer. By transposing the weights we can use matrix multiplication. The resulting matrix has a shape that aligns with $Z$ and $A$ of the previous layer. 
