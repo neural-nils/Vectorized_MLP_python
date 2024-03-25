@@ -618,7 +618,9 @@ epoch 5 	 avg_loss: 0.136 	accuracy:  0.958
 We can already tell that there is a decent decrease of the loss as well as an increasing accuracy. 
 Plotting the loss over the epochs confirms that our MLP works perfectly fine:
 
-![](loss.png)
+<p align="center">
+<img src="loss.png" width="300"/>
+</p>
 
 In fact after 20 epochs of training we achieve an accuracy of > 0.99 on the train set:
 ~~~bash
