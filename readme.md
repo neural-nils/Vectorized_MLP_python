@@ -619,7 +619,7 @@ We can already tell that there is a decent decrease of the loss as well as an in
 Plotting the loss over the epochs confirms that our MLP works perfectly fine:
 
 <p align="center">
-<img src="loss.png" width="300"/>
+<img src="loss.png" width="500"/>
 </p>
 
 In fact after 20 epochs of training we achieve an accuracy of > 0.99 on the train set:
